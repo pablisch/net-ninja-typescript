@@ -27,3 +27,26 @@ form.addEventListener('submit', (e: Event) => {
 
   list.render(doc, type.value, 'end');
 });
+
+// Generics
+
+const addUID = <T extends {name: string}>(obj: T) => { // T extends object means that the type of T must be an object with a name property
+  let uid = Math.floor(Math.random() * 1000);
+
+  return {...obj, uid};
+} 
+
+let docOne = addUID({ name: 'mario', age: 40 });
+
+console.log(docOne);
+console.log(docOne.name);
+console.log(docOne.age);
+console.log(docOne.uid);
+
+// Generics with interfaces
+
+interface Resource<T> { // T is a generic type
+  uid: number;
+  resourceName: string;
+  data: T; // T is a generic type
+}
