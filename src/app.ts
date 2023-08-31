@@ -45,8 +45,24 @@ console.log(docOne.uid);
 
 // Generics with interfaces
 
-interface Resource<T> { // T is a generic type
+interface Resource<T> { 
   uid: number;
-  resourceName: string;
-  data: T; // T is a generic type
+  resourceType: ResourceType;
+  data: T;
+}
+
+// ENUMS
+
+enum ResourceType { BOOK, AUTHOR, FILM, DIRECTOR, PERSON }
+
+const docTwo: Resource<object> = {
+  uid: 1,
+  resourceType: ResourceType.BOOK,
+  data: { title: 'shaun of the dead' }
+}
+
+const docThree: Resource<object> = {
+  uid: 10,
+  resourceType: ResourceType.PERSON,
+  data: { name: 'yoshi' }
 }
