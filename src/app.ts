@@ -17,12 +17,14 @@ const list = new ListTemplate(ul);
 
 form.addEventListener('submit', (e: Event) => {
   e.preventDefault();
+  
+  let values: [string, string, number] = [toFrom.value, details.value, amount.valueAsNumber];
 
   let doc: HasFormatter;
   if (type.value === 'invoice') {
-    doc = new Invoice(toFrom.value, details.value, amount.valueAsNumber);
+    doc = new Invoice(...values);
   } else {
-    doc = new Payments(toFrom.value, details.value, amount.valueAsNumber);
+    doc = new Payments(...values);
   }
 
   list.render(doc, type.value, 'end');
@@ -66,3 +68,24 @@ const docThree: Resource<object> = {
   resourceType: ResourceType.PERSON,
   data: { name: 'yoshi' }
 }
+
+// Tuples
+
+let arr = ['ryu', 25, true];
+arr[0] = false;
+arr[1] = 'yoshi';
+arr = [30, false, 'yoshi'];
+
+let tup: [string, number, boolean] = ['ryu', 25, true];
+tup[0] = 'ken';
+tup[1] = 30;
+tup[2] = false;
+
+// tup[0] = false; // error because the first element must be a string
+
+let student: [string, number];
+student = ['chun-li', 223423]; // correct
+// student = [234234, 'chun-li']; // error because the first element must be a string
+
+
+
